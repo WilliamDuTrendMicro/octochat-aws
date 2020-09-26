@@ -22,8 +22,8 @@ jobs:
       run: |
         npm ci
         npm run lint
-        npm audit
-     #  npm test
+     #  npm audit
+       npm test
       env:
         CI: true
       working-directory: app
