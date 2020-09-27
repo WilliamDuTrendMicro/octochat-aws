@@ -9,8 +9,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
-        #node-version: [8.x]
+        #node-version: [8.x, 10.x, 12.x]
+        node-version: [8.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -27,6 +27,8 @@ jobs:
       env:
         CI: true
       working-directory: app
+    - name: gitleaks-action
+      uses: eshork/gitleaks-action@v1.0.0
 
   build:
     needs: test
@@ -37,4 +39,4 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t "$GITHUB_REPOSITORY:$IMAGE_TAG" .
+          docker build -t "$IMAGE_TAG" .
